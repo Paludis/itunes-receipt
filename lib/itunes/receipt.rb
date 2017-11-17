@@ -45,6 +45,9 @@ module Itunes
       :purchase_date,
       :purchase_date_ms,
       :purchase_date_pst,
+      :auto_renew_status,
+      :auto_renew_product_id,
+      :price_consent_status,
       :quantity,
       :receipt_data,
       :request_date,
@@ -142,6 +145,9 @@ module Itunes
       @transaction_id = receipt_attributes[:transaction_id]
       @version_external_identifier = receipt_attributes[:version_external_identifier]
       @web_order_line_item_id = receipt_attributes[:web_order_line_item_id]
+      @auto_renew_status = receipt_attributes[:auto_renew_status]
+      @auto_renew_product_id = receipt_attributes[:auto_renew_product_id]
+      @price_consent_status = receipt_attributes[:price_consent_status]
     end
 
     def application_receipt?
