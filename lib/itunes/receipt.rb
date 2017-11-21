@@ -47,7 +47,8 @@ module Itunes
       :purchase_date_pst,
       :auto_renew_status,
       :auto_renew_product_id,
-      :price_consent_status,
+      :is_in_billing_retry_period,
+      :expiration_intent,
       :quantity,
       :receipt_data,
       :request_date,
@@ -59,7 +60,12 @@ module Itunes
     )
 
     def initialize(attributes = {})
-      receipt_attributes = attributes.with_indifferent_access[:receipt]
+      indifferent_attributes = attributes.with_indifferent_access
+      @auto_renew_status = indifferent_attributes[:auto_renew_status]
+      @auto_renew_product_id = indifferent_attributes[:auto_renew_product_id]
+      @is_in_billing_retry_period = indifferent_attributes[:is_in_billing_retry_period]
+      @expiration_intent = indifferent_attributes[:expiration_intent]
+      receipt_attributes = indifferent_attributes[:receipt]
       @adam_id = receipt_attributes[:adam_id]
       @app_item_id = receipt_attributes[:app_item_id]
       @application_version = receipt_attributes[:application_version]
@@ -145,9 +151,6 @@ module Itunes
       @transaction_id = receipt_attributes[:transaction_id]
       @version_external_identifier = receipt_attributes[:version_external_identifier]
       @web_order_line_item_id = receipt_attributes[:web_order_line_item_id]
-      @auto_renew_status = receipt_attributes[:auto_renew_status]
-      @auto_renew_product_id = receipt_attributes[:auto_renew_product_id]
-      @price_consent_status = receipt_attributes[:price_consent_status]
     end
 
     def application_receipt?
