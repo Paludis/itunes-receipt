@@ -47,7 +47,7 @@ module Itunes
       :purchase_date_pst,
       :auto_renew_status,
       :auto_renew_product_id,
-      :is_in_billing_retry_period,
+      :pending_renewal_original_transaction_id,
       :expiration_intent,
       :quantity,
       :receipt_data,
@@ -61,10 +61,11 @@ module Itunes
 
     def initialize(attributes = {})
       indifferent_attributes = attributes.with_indifferent_access
-      @auto_renew_status = indifferent_attributes[:auto_renew_status]
-      @auto_renew_product_id = indifferent_attributes[:auto_renew_product_id]
-      @is_in_billing_retry_period = indifferent_attributes[:is_in_billing_retry_period]
-      @expiration_intent = indifferent_attributes[:expiration_intent]
+      if pending_renewal_info = indifferent_attributes[:pending_renewal_info]
+        @auto_renew_status = pending_renewal_info[:auto_renew_status]
+        @auto_renew_product_id = pending_renewal_info[:auto_renew_product_id]
+        @pending_renewal_original_transaction_id = pending_renewal_info[:original_transaction_id]
+      end
       receipt_attributes = indifferent_attributes[:receipt]
       @adam_id = receipt_attributes[:adam_id]
       @app_item_id = receipt_attributes[:app_item_id]
