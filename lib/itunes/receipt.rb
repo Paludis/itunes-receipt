@@ -38,7 +38,7 @@ module Itunes
       :expires_date_pst,
       :in_app,
       :is_trial_period,
-      :is_in_intro_offer_period
+      :is_in_intro_offer_period,
       :itunes_env,
       :latest,
       :original,
