@@ -38,6 +38,7 @@ module Itunes
       :expires_date_pst,
       :in_app,
       :is_trial_period,
+      :is_in_intro_offer_period
       :itunes_env,
       :latest,
       :original,
@@ -91,6 +92,9 @@ module Itunes
       end
       @is_trial_period = if receipt_attributes[:is_trial_period]
         receipt_attributes[:is_trial_period] == "true"
+      end
+      @is_in_intro_offer_period = if receipt_attributes[:is_in_intro_offer_period]
+        receipt_attributes[:is_in_intro_offer_period] == "true"
       end
       @itunes_env = attributes[:itunes_env] || Itunes.itunes_env
       @latest = case attributes[:latest_receipt_info]
